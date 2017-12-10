@@ -1,40 +1,37 @@
 var b = document.getElementById("b");
+var list = document.getElementsByTagName("li");
+var heading = document.getElementById("h");
 var num = 8;
+ 
+b.addEventListener('click', buttonCallback);
 
-var callbackButton = function(e) {
-	//console.log("This ran.");
-	var list = document.getElementById("thelist");
-	var newDiv = document.createElement("li");
-	newDiv.innerHTML = "item " + num;
-	num ++;
-	element = list.appendChild(newDiv);
-	element.addEventListener('mouseover', callbackHover);
-	element.addEventListener('mouseleave', callbackLeave);
-	element.addEventListener('click', callbackRemove);
+var buttonCallback = function(e) {
+    var l = document.getElementById("thelist");
+    var newDiv = document.createElement("li");
+    newDiv.innerHTML = "item " + num;
+    l.appendChild(newDiv);
+    num ++;
+   	newDiv.addEventListener("mouseenter", listOverCallback);
+	newDiv.addEventListener("mouseleave", listLeaveCallback);
+	newDiv.addEventListener("click", listClickCallback);
 };
 
-b.addEventListener('click', callbackButton);
+b.addEventListener('click', buttonCallback);
 
-var list = document.getElementsByTagName("li");
-
-var callbackHover = function(e) {
-	var heading = document.getElementById("h");
-	heading.innerHTML = this.innerHTML;
+var listOverCallback = function(e){
+    heading.innerHTML = this.innerHTML;
+};
+ 
+var listLeaveCallback = function(e){
+    heading.innerHTML = "Hello World!";
 }
-
-var callbackLeave = function(e) {
-	var heading = document.getElementById("h");
-	heading.innerHTML = "Hello World!";
-}
-
-var callbackRemove = function(e) {
-	var list = document.getElementById("thelist");
-	list.removeChild(this);
-}
+		   
+var listClickCallback = function(e){
+    this.remove();
+};
 
 for (i = 0; i < list.length; i ++) {
-	element = list[i];
-	element.addEventListener('mouseover', callbackHover);
-	element.addEventListener('mouseleave', callbackLeave);
-	element.addEventListener('click', callbackRemove);
+	list[i].addEventListener("mouseenter", listOverCallback);
+	list[i].addEventListener("mouseleave", listLeaveCallback);
+	list[i].addEventListener("click", listClickCallback);
 }
