@@ -2,8 +2,8 @@ var b = document.getElementById("b");
 var list = document.getElementsByTagName("li");
 var heading = document.getElementById("h");
 var num = 8;
- 
-b.addEventListener('click', buttonCallback);
+var b2 = document.getElementById("b2");
+var counter = 1;
 
 var buttonCallback = function(e) {
     var l = document.getElementById("thelist");
@@ -29,6 +29,28 @@ var listLeaveCallback = function(e){
 var listClickCallback = function(e){
     this.remove();
 };
+
+var fibonacci = function(n) {
+	if (n == 2) {
+		return 1;
+	}
+	else if (n == 1) {
+		return 1;
+	}
+	else {
+		return fibonacci(n - 1) + fibonacci(n - 2);
+	}
+}
+
+var button2Callback = function(e) {
+    var l = document.getElementById("fib");
+    var newDiv = document.createElement("li");
+    newDiv.innerHTML = fibonacci(counter);
+    l.appendChild(newDiv);
+    counter ++;
+};
+
+b2.addEventListener('click', button2Callback);
 
 for (i = 0; i < list.length; i ++) {
 	list[i].addEventListener("mouseenter", listOverCallback);
